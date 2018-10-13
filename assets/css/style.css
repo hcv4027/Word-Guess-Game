@@ -1,0 +1,30 @@
+.headimage{
+    width: 600px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+h1{
+    text-align: center;
+}
+body{
+    background-color: lightblue;
+}
+
+#try{
+    background-color: gray;
+    height: 250px;
+}
+
+#playingfield{
+    font-size: 20px;
+    border: 2px solid green;
+    height: 44px;
+}
+
+#hintbutton{
+    display: none;
+}
