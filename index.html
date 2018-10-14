@@ -21,22 +21,32 @@
     <hr/>
     <div class="container">
         <div class="row">
-            <div class="col-md-3" id="try">
-                <button type="button" class="btn btn-info" id="hintbutton">Hint!</button>
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <p id="instruct-text"></p>
                 <p id="guesses-text"></p>
                 <p id="chosen"></p>
                 
             </div>
-            <div class="col-md-3" id="playingfield">
+            <div class="col-md-4" id="playingfield">
                 <p id="userchoice-text"></p>
                 
                 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <p id="wins-text"></p>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-3" id="try">
+                <div class="row">
+                    <button type="button" class="btn btn-info" id="hintbutton" onclick="change();">Hint!</button>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <img src="assets/images/Hinter.png" id="hinter" class="img-responsive">
+                    </div>
+                </div>
                 
             </div>
         </div>
