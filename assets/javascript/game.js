@@ -1,6 +1,7 @@
 //Create an array of all character names from the 90s cartoons.
 var names = ["ANIMANIACS", "HERCULES", "ALADDIN", "CASPER", "DROOPY", "POKEMON", "TICK"];
 var userGuess = " ";
+var found = false;
 
 //Create an array for tracking correct answers given by player.
 var correct = [];
@@ -32,6 +33,7 @@ var chosenText = document.getElementById("chosen");
 
 document.onkeyup = function(event)
 {
+    console.log("Entering guessing loop!")
     //Check to see if the game has already started.
     if(gamestarted)
     {
@@ -48,23 +50,47 @@ document.onkeyup = function(event)
                     {
                         if(userGuess === name[i])
                         {
-                            answers[i] = userGuess;
-                            guessesleft--;
-                            guessesText.textContent = "Right! "+(guessesleft - 1) + " guesses left.";
-                            correct[i] = userGuess;
-                            console.log(correct);
-                            if(correct.length === name.length)
+                            found = true;
+                            if(found)
                             {
-                                alert("WINNER!")
-                                wins++;
+                                answers[i] = userGuess;
+                                guessesleft--;
+                                guessesText.textContent = "Right! "+(guessesleft - 1) + " guesses left.";
+                                correct[i] = userGuess;
+                                console.log(correct);
+                                if(correct.length === name.length)
+                                {
+                                    wins++;
+                                    alert("WINNER!");
+                                    winsText.textContent = "Wins: " + wins;
+                                    
+                                }
                             }
+                            //answers[i] = userGuess;
+
+                            // guessesleft--;
+                            // guessesText.textContent = "Right! "+(guessesleft - 1) + " guesses left.";
+                            // correct[i] = userGuess;
+                            // console.log(correct);
+                            // if(correct.length === name.length)
+                            // {
+                            //     alert("WINNER!")
+                            //     wins++;
+                            // }
                         }
                         else
+                        {
+                            // console.log(guessesleft);
+                            // guessesText.textContent = "Letter not available! "+(guessesleft - 1) + " guesses left.";
+                        }
+                    }
+                        if(!found)
                         {
                             console.log(guessesleft);
                             guessesText.textContent = "Letter not available! "+(guessesleft - 1) + " guesses left.";
                         }
-                    }
+                        
+                       
             
         }
         userChoiceText.textContent = answers.join(" ");
@@ -118,4 +144,11 @@ function change()
 
     }
     
-}
+};
+
+// function gostart()
+// {
+//     var rebound = confirm("Would you like to play again?");
+    
+//     gamestarted = false;
+// };
