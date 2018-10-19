@@ -3,10 +3,8 @@ var names = ["ANIMANIACS", "HERCULES", "ALADDIN", "CASPER", "DROOPY", "POKEMON",
 var userGuess = " ";
 var found = false;
 
-//Create an array for tracking correct answers given by player.
-var correct = [];
 
-//Randomly pick a character to play word guess with.            
+//Randomly pick a character to play word guess with, from the names array.            
 var name = names[Math.floor(Math.random() * names.length)];
 
 //Flag to check the status of whether the game has been started.
@@ -29,76 +27,60 @@ var winsText = document.getElementById("wins-text");
 var guessesText = document.getElementById("guesses-text");
 var instructText = document.getElementById("instruct-text");
 var chosenText = document.getElementById("chosen");
+var starter = document.getElementById("starter");
+var image = document.getElementById('hinter');
 
-
+//Displsys underscores for the amount of characters in the game that begins on keypress.
+userChoiceText.textContent = answers.join(" ");
 document.onkeyup = function(event)
 {
-    console.log("Entering guessing loop!")
     //Check to see if the game has already started.
     if(gamestarted)
     {
         if(guessesleft >= 0)
         {
-            // var 
             userGuess = event.key.toUpperCase();
             chosenText.textContent = "You chose: "+userGuess;
 
-            //Joins the elements of the array and displays for user to see the word length and amount of guesses!
-            userChoiceText.textContent = answers.join(" ");
-            
+            //Joins the elements of the array and displays for user to see the word length and amount of guesses!            
                     for(var i = 0; i < name.length; i++)
                     {
                         if(userGuess === name[i])
                         {
-                            found = true;
-                            if(found)
-                            {
+                        
                                 answers[i] = userGuess;
                                 guessesleft--;
-                                guessesText.textContent = "Right! "+(guessesleft - 1) + " guesses left.";
-                                correct[i] = userGuess;
-                                console.log(correct);
-                                if(correct.length === name.length)
-                                {
-                                    wins++;
-                                    alert("WINNER!");
-                                    winsText.textContent = "Wins: " + wins;
-                                    
-                                }
-                            }
-                            //answers[i] = userGuess;
+                                guessesText.textContent = "Right! "+(guessesleft) + " guesses left.";
+                                userChoiceText.textContent = answers.join(" ");
+                                console.log(answers);
+                        }
 
-                            // guessesleft--;
-                            // guessesText.textContent = "Right! "+(guessesleft - 1) + " guesses left.";
-                            // correct[i] = userGuess;
-                            // console.log(correct);
-                            // if(correct.length === name.length)
-                            // {
-                            //     alert("WINNER!")
-                            //     wins++;
-                            // }
-                        }
-                        else
+                        if(!answers.includes("_"))
                         {
-                            // console.log(guessesleft);
-                            // guessesText.textContent = "Letter not available! "+(guessesleft - 1) + " guesses left.";
+                            answers = name;
+                            wins++;
+                            winsText.textContent = "Wins: " + wins;
+                            starter.textContent = "WINNER! WINNER! WINNER!"
+                            setTimeout(function(){ gostart();}, 1000);
                         }
-                    }
-                        if(!found)
+
+                        if(userGuess !== name[i])    
                         {
                             console.log(guessesleft);
-                            guessesText.textContent = "Letter not available! "+(guessesleft - 1) + " guesses left.";
                         }
-                        
-                       
-            
+                    }
+                    
+                    if(!name.includes(userGuess))
+                    {
+                        guessesleft--;
+                        guessesText.textContent = "Letter not available! "+(guessesleft) + " guesses left.";
+                    }
+   
         }
-        userChoiceText.textContent = answers.join(" ");
+        
     }
-    else // The game has not started yet, this will run on your first keypress.
+    else // Arriving here means that the game has not started yet, this will run on your first keypress.
     {
-        alert("Hit any key to start the game");
-        userChoiceText.textContent = answers.join(" ");
         instructText.textContent = "Guess a single letter";
         winsText.textContent = "Wins: " + wins;
         guessesText.textContent = guessesleft + " guesses left.";
@@ -107,9 +89,12 @@ document.onkeyup = function(event)
         
     }
 };
+
+//The change function switches out the hint images with the acual chracxter images.
+//This module of code makes use of a switch statement.
 function change()
 {
-    var image = document.getElementById('hinter');
+    //var image = document.getElementById('hinter');
     if(name === "ALADDIN"){
         image.src = "assets/images/ALADDIN.png";
     }
@@ -143,12 +128,31 @@ function change()
         break;
 
     }
-    
 };
 
-// function gostart()
-// {
-//     var rebound = confirm("Would you like to play again?");
-    
-//     gamestarted = false;
-// };
+//This functions is what is used to reinitialize the elements on the page for playong the game ore than once
+function gostart()
+{
+    confirm("Would you like to play again?");
+    gamestarted = false;
+    name = names[Math.floor(Math.random() * names.length)];
+    answers=[];
+    answerfill(answers);
+    userChoiceText.textContent = answers.join(" ");
+    guessesleft = name.length + 4;
+    userChoiceText.textContent = answers.join(" ");
+    instructText.textContent = "Guess a single letter";
+    guessesText.textContent = guessesleft + " guesses left.";
+    chosenText.textContent = "";
+    starter.textContent = "Press any key to start a new game!";
+    image.src = "assets/images/Hinter.png";
+};
+
+//The following function is used to refill the answers array with underscores for replaying the game.
+function answerfill(answers)
+{
+    for (var i = 0; i < name.length; i++)
+    {
+        answers[i] = "_";
+    }
+};

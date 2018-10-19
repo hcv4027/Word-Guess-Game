@@ -16,27 +16,31 @@
         <img class="headimage" src="assets/images/Head_Logo.png">
     </div>
       
-    <h1>Press any key to get started!</h1>
+    <h1 id="starter">Press any key to get started!</h1>
     
     <hr/>
     <div class="container">
         <div class="row">
+            <!-- Area is configured for showing player instructions, the amount of guesses they have left, and
+                 the letter they selected, during gameplay. -->
             <div class="col-md-4">
                 <p id="instruct-text"></p>
                 <p id="guesses-text"></p>
                 <p id="chosen"></p>
-                
             </div>
+
+            <!-- This column is configured to show the results of the player's guesses and the overall puzzle. -->
             <div class="col-md-4" id="playingfield">
                 <p id="userchoice-text"></p>
-                
-                
             </div>
+
+            <!-- Column configured for showing the player their total amunt of wins -->
             <div class="col-md-4">
                 <p id="wins-text"></p>
-                
             </div>
-        </div>
+        </div> 
+
+        <!-- This row is configured to show a hint when the player clicks the hint button -->
         <div class="row">
             <div class="col-md-6 offset-3" id="try">
                 <div class="row">
@@ -47,15 +51,10 @@
                         <img src="assets/images/Hinter.png" id="hinter" class="img-responsive">
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
-    
-   
-    
-
-
+    <!-- Script tags placed here so that all avriables are formed before jvascript code begins processing. -->
     <script src="assets/javascript/game.js"></script>
   </body>
 </html>
